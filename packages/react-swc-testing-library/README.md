@@ -1,4 +1,4 @@
-# React × Jest × 　SWC × testing-linrary
+# React × Jest × SWC × testing-linrary
 
 https://zenn.dev/uttk/scraps/475390e9d5b820
 
