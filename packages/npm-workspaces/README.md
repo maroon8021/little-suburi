@@ -22,6 +22,12 @@ import { calc } from "x-hoge-a";
 }
 ```
 
+`dependencies` に追加しないと、以下のように怒られる
+```
+'x-hoge-b' should be listed in the project's dependencies. Run 'npm i -S x-hoge-b' to add iteslintimport/no-extraneous-dependencies
+```
+
+
 ## 余談
 ```json
 {
