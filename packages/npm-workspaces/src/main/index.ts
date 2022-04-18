@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { calc } from "x-hoge-a";
 import { calc2 } from "x-hoge-b";
 
