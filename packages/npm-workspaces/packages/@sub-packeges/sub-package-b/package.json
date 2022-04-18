@@ -1,0 +1,16 @@
+{
+  "name": "@sub-packeges/sub-package-b",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@sub-packeges/sub-package-a": "^1.0.0",
+    "x-hoge-b": "file:packages/x-hoge-b"
+  }
+}

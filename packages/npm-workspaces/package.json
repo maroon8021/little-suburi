@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "packages/@sub-packeges/sub-package-a",
+    "packages/@sub-packeges/sub-package-b"
   ],
   "engines": {
     "yarn": "do not use yarn",
@@ -19,7 +21,7 @@
   "license": "ISC",
   "dependencies": {
     "x-hoge-a": "*",
-    "x-hoge-b": "*"
+    "x-hoge-b": "file:packages/x-hoge-b"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.19.0",
