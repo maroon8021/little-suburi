@@ -1,9 +1,19 @@
 import { ApolloServer, gql } from "apollo-server";
 
 const typeDefs = gql`
+  type StringValue {
+    value: String
+  }
+
+  type IntValue {
+    value: Int
+  }
+  union UnionValue = StringValue | IntValue
+
   type Book {
     title: String
     author: String
+    unionValue: UnionValue
   }
 
   input BookLengthInput {
@@ -28,10 +38,18 @@ const books = [
   {
     title: "The Awakening",
     author: "Kate Chopin",
+    unionValue: {
+      __typename: "StringValue",
+      value: "hoge",
+    },
   },
   {
     title: "City of Glass",
     author: "Paul Auster",
+    unionValue: {
+      __typename: "IntValue",
+      value: 1,
+    },
   },
 ];
 

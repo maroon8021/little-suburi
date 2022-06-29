@@ -1,0 +1,21 @@
+{
+  "name": "nact",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "node-dev src/index.ts"
+  },
+  "dependencies": {
+    "express": "^4.18.1",
+    "nact": "^7.6.2",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/uuid": "^8.3.4",
+    "node-dev": "^7.4.3",
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.4"
+  }
+}
