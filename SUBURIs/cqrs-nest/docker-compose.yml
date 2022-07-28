@@ -1,0 +1,16 @@
+version: "3.7"
+services:
+  database:
+    image: postgres:12-alpine
+    ports:
+      - "58000:5432"
+    volumes:
+      - .:/app:cached
+    working_dir: /app
+    environment:
+      - POSTGRES_INITDB_ARGS="--no-locale"
+      - POSTGRES_USER=superuser
+      - POSTGRES_PASSWORD=superuserpass
+      - POSTGRES_DB=db-sample
+
+    restart: always
