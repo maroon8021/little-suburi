@@ -23,10 +23,10 @@ export const databaseProvider = {
     const dataSource = new DataSource({
       type: 'postgres',
       entities: useTSFiles
-        ? ['./src/interface/entity/*.*']
-        : ['./dist/interface/entity/*.*'],
+        ? ['./src/infrastructure/entity/*.*']
+        : ['./dist/infrastructure/entity/*.*'],
       migrations: isDbMigration
-        ? ['./src/interface/databases/migrations/*.ts']
+        ? ['./src/infrastructure/database/migrations/*.ts']
         : [],
       logging: true,
 

@@ -1,10 +1,13 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { CqrsModule } from '@nestjs/cqrs';
+import { CommandHandler } from './application/command';
+import { QueryHandlers } from './application/query';
+import { databaseProvider } from './infrastructure/database';
+import { TodoController } from './interface/controller/todo.controller';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [CqrsModule],
+  controllers: [TodoController],
+  providers: [databaseProvider, ...QueryHandlers, ...CommandHandler],
 })
 export class AppModule {}

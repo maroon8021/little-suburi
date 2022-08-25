@@ -20,6 +20,10 @@ export class addTodo1658883610809 implements MigrationInterface {
             type: 'varchar',
           },
           {
+            name: 'is_completed',
+            type: 'boolean',
+          },
+          {
             name: 'created_at',
             type: 'timestamptz(6)',
             default: 'NOW()',
@@ -43,6 +47,6 @@ export class addTodo1658883610809 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('user');
+    await queryRunner.dropTable('todo');
   }
 }
