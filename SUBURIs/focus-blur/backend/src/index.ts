@@ -7,7 +7,7 @@ const PORT = 50000;
 app.use(express.json());
 app.use(cors({ origin: "http://localhost:3000" }));
 
-app.all("/*", async (_req: Request, res: Response) => {
+app.options("/*", async (_req: Request, res: Response) => {
   res.setHeader("Access-Control-Allow-Credentials", "true");
   return res.status(200).send({
     message: "Hello World!!!",
@@ -15,6 +15,7 @@ app.all("/*", async (_req: Request, res: Response) => {
 });
 
 app.get("/time", async (_req: Request, res: Response) => {
+  res.setHeader("Access-Control-Allow-Credentials", "true");
   return res.status(200).send({
     message: `Hello World!!! Now: ${new Date().toLocaleTimeString()}`,
   });

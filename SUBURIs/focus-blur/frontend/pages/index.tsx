@@ -10,17 +10,23 @@ export default function Home() {
     fetch(`${BACKEND_URL}/time`, {
       method: "GET",
       credentials: "include",
-    }).then((result) => {
-      console.log(result);
-    });
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        setTime(result.message as string);
+      });
   };
 
   useEffect(() => {
+    if (timer.current) {
+      return;
+    }
     timer.current = setInterval(() => {
       timeRequest();
     }, 1000);
 
     window.addEventListener("focus", () => {
+      console.log("focused");
       if (!timer.current) {
         timer.current = setInterval(() => {
           timeRequest();
@@ -29,6 +35,7 @@ export default function Home() {
     });
 
     window.addEventListener("blur", () => {
+      console.log("blured");
       if (timer.current) {
         clearInterval(timer.current);
         timer.current = undefined;
