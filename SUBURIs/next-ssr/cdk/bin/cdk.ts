@@ -6,6 +6,7 @@ import { Lambda } from "../lib/lambda";
 import { ApiGateway } from "../lib/api-gateway";
 
 import { App, Environment, aws_lambda as lambda } from "aws-cdk-lib";
+import { CloudFront } from "../lib/cloudfront";
 
 const app = new App();
 
@@ -25,7 +26,12 @@ const { lambdaFunction } = new Lambda(app, "nextSsrLambda", {
   code: lambda.Code.fromAsset(`${__dirname}/../../frontend/.next/standalone`),
 });
 
-new ApiGateway(app, "nextSsrApiGateway", {
+const { api } = new ApiGateway(app, "nextSsrApiGateway", {
   env,
   lambdaFunction,
+});
+
+new CloudFront(app, "nextSsrCloudfront", {
+  env,
+  api,
 });

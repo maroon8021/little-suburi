@@ -11,14 +11,13 @@ type ApiGatewayProps = {
 } & StackProps;
 
 export class ApiGateway extends Stack {
-  public readonly apigwDomain: apigw.DomainName;
-  public readonly domainName: string;
+  public readonly api: apigw.LambdaRestApi;
   constructor(scope: Construct, id: string, props: ApiGatewayProps) {
     super(scope, id, props);
 
     const { lambdaFunction } = props;
 
-    const api = new apigw.LambdaRestApi(this, "next-ssr-endpoint", {
+    this.api = new apigw.LambdaRestApi(this, "next-ssr-endpoint", {
       handler: lambdaFunction,
       //proxy: false,
       restApiName: "next-ssr",
