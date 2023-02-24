@@ -1,5 +1,6 @@
 import { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
+import Link from "next/link";
 import styles from "../../styles/Home.module.css";
 
 type Props = {
@@ -17,6 +18,9 @@ const Home: NextPage<Props> = ({ title }) => {
 
       <main className={styles.main}>
         <h1 className={styles.title2}>{title}</h1>
+        <div>
+          <Link href={"./"}>to index</Link>
+        </div>
       </main>
     </div>
   );

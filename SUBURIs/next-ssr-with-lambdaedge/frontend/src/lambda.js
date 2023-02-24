@@ -108,55 +108,25 @@ const getErrMessage = (e) => ({
 
 const nextHandler = nextServer.getRequestHandler();
 
-const handler = async (event, _context, callback) => {
-  console.log(event);
-  console.log(JSON.stringify(event));
-
-  console.log(_context);
-
-  /**
-   * /dist/server/base-http/index.d.ts
-   * BaseNextRequest
-   */
-  const request = {
-    method: event.httpMethod,
-    url: event.path,
-    body: event.body,
-    headers: event.headers,
-  };
-
-  /**
-   * /dist/server/base-http/index.d.ts
-   * BaseNextResponse
-   */
-  const response = {
-    send: () => callback(),
-    body: (s) => {
-      console.log(s);
-      return this;
-    },
-    setHeader: () => {},
-  };
-
-  const handler = nextServer.getRequestHandler();
-
-  const result = await handler(request, response);
-  console.log(result);
-};
-
 const server = serverlessHttp(
   async (req, res) => {
     req.url = req.url === "/" ? req.url : `/${req.url}`;
     console.log(req);
     console.log(res);
-    await nextHandler(req, res).catch((e) => {
-      // Log into Cloudwatch for easier debugging.
-      console.error(`NextJS request failed due to:`);
-      console.error(e);
+    await nextHandler(req, res)
+      .then((context) => {
+        console.log("in then");
+        console.log(context);
+        return context;
+      })
+      .catch((e) => {
+        // Log into Cloudwatch for easier debugging.
+        console.error(`NextJS request failed due to:`);
+        console.error(e);
 
-      res.setHeader("Content-Type", "application/json");
-      res.end(JSON.stringify(getErrMessage(e), null, 3));
-    });
+        res.setHeader("Content-Type", "application/json");
+        res.end(JSON.stringify(getErrMessage(e), null, 3));
+      });
   },
   {
     // We have separate function for handling images. Assets are handled by S3.
@@ -166,4 +136,9 @@ const server = serverlessHttp(
   }
 );
 
-exports.handler = server;
+const handler = (arg) => {
+  console.log("arg", arg);
+  return server(...arg);
+};
+
+exports.handler = handler;

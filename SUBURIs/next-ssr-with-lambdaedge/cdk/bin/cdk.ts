@@ -25,7 +25,7 @@ const { lambdaFunction } = new Lambda(app, "nextSsrWithLambdaEdgeLambda", {
   code: lambda.Code.fromAsset(`${__dirname}/../../frontend/.next/standalone`),
 });
 
-new CloudFront(app, "nextSsrCloudfront", {
+new CloudFront(app, "nextSsrWithLambdaEdgeCloudfront", {
   env,
   edgeFunction: lambdaFunction,
 });

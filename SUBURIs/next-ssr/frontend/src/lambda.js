@@ -159,8 +159,6 @@ const server = serverlessHttp(
     });
   },
   {
-    // We have separate function for handling images. Assets are handled by S3.
-    binary: true,
     provider: "aws",
     basePath: "/",
   }

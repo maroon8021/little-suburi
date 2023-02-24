@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && pnpm set-lambda-js && pnpm set-serverless-http",
+    "deploy:s3": "aws s3 cp --recursive --region ap-northeast-1 ./.next/static s3://next-ssr-static-321/_next/static",
     "start": "next start",
     "lint": "next lint",
     "set-lambda-js": "cp -f ./src/lambda.js ./.next/standalone/",
