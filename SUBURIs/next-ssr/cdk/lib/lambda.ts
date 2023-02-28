@@ -39,3 +39,36 @@ export class Lambda extends Stack {
     });
   }
 }
+
+type LambdaContainerProps = {
+  role: iam.Role;
+  code: lambda.DockerImageCode;
+  functionName: string;
+} & StackProps;
+
+export class LambdaContainer extends Stack {
+  public readonly lambdaFunction: lambda.Function;
+  constructor(parent: Construct, id: string, props: LambdaContainerProps) {
+    super(parent, id, props);
+
+    const { code, functionName, role } = props;
+
+    role.addManagedPolicy(
+      iam.ManagedPolicy.fromAwsManagedPolicyName(
+        "service-role/AWSLambdaBasicExecutionRole" // to write logs on cloudwatch
+      )
+    );
+
+    this.lambdaFunction = new lambda.DockerImageFunction(
+      this,
+      "next-ssr-lambda-container",
+      {
+        functionName,
+        code,
+        role,
+        timeout: Duration.seconds(30),
+        logRetention: logs.RetentionDays.ONE_WEEK,
+      }
+    );
+  }
+}

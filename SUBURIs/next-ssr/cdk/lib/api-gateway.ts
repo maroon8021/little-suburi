@@ -8,6 +8,7 @@ import { Construct } from "constructs";
 
 type ApiGatewayProps = {
   lambdaFunction: lambda.Function;
+  restApiName: string;
 } & StackProps;
 
 export class ApiGateway extends Stack {
@@ -15,12 +16,12 @@ export class ApiGateway extends Stack {
   constructor(scope: Construct, id: string, props: ApiGatewayProps) {
     super(scope, id, props);
 
-    const { lambdaFunction } = props;
+    const { lambdaFunction, restApiName } = props;
 
     this.api = new apigw.LambdaRestApi(this, "next-ssr-endpoint", {
       handler: lambdaFunction,
       //proxy: false,
-      restApiName: "next-ssr",
+      restApiName,
       defaultCorsPreflightOptions: {
         allowOrigins: ["*"],
         allowHeaders: ["content-type", "authorization"],

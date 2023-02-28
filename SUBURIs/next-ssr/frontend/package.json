@@ -5,11 +5,13 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && pnpm set-lambda-js && pnpm set-serverless-http",
+    "build:s": "next build",
     "deploy:s3": "aws s3 cp --recursive --region ap-northeast-1 ./.next/static s3://next-ssr-static-321/_next/static",
     "start": "next start",
     "lint": "next lint",
     "set-lambda-js": "cp -f ./src/lambda.js ./.next/standalone/",
-    "set-serverless-http": "cp -f -r ./node_modules/serverless-http ./.next/standalone/node_modules/"
+    "set-serverless-http": "cp -f -r ./node_modules/serverless-http ./.next/standalone/node_modules/",
+    "to-lambda-js": "tsc src/lambda.ts --outDir ./.next/standalone/"
   },
   "dependencies": {
     "@types/node": "18.11.11",

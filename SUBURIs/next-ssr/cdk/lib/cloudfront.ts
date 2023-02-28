@@ -10,20 +10,16 @@ import { Construct } from "constructs";
 
 type CloudFrontProps = {
   api: apigw.LambdaRestApi;
+  bucket: s3.Bucket;
 } & StackProps;
 
 export class CloudFront extends Stack {
-  public readonly bucket: s3.Bucket;
   public readonly distribution: cloudfront.Distribution;
 
   constructor(scope: Construct, id: string, props: CloudFrontProps) {
     super(scope, id, props);
 
-    const { api } = props;
-
-    this.bucket = new s3.Bucket(this, `nextSsrCloudFrontBucket`, {
-      bucketName: `next-ssr-static-321`,
-    });
+    const { api, bucket } = props;
 
     // const originAccessIdentity = new cloudfront.OriginAccessIdentity(
     //   this,
@@ -53,7 +49,7 @@ export class CloudFront extends Stack {
             cachePolicy: cloudfront.CachePolicy.CACHING_DISABLED,
           },
           "/_next/*": {
-            origin: new origins.S3Origin(this.bucket),
+            origin: new origins.S3Origin(bucket),
             viewerProtocolPolicy:
               cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
           },
