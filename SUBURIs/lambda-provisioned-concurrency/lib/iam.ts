@@ -10,5 +10,11 @@ export class Iam extends Stack {
       roleName: `lambda-provisioned-concurrency-role`,
       assumedBy: new iam.ServicePrincipal("lambda.amazonaws.com"), // ここなんとかしたい
     });
+
+    this.role.addManagedPolicy(
+      iam.ManagedPolicy.fromAwsManagedPolicyName(
+        "service-role/AWSLambdaBasicExecutionRole" // to write logs on cloudwatch
+      )
+    );
   }
 }

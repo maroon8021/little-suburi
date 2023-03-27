@@ -16,22 +16,22 @@ const { role } = new Iam(app, "LambdaProvisionedConcurrencyIam", {
   env,
 });
 
-new Lambda(app, "LambdaProvisionedConcurrencyLambda", {
+new Lambda(app, "LambdaProvisionedConcurrencySimple", {
   env,
   role,
-  functionName: "lambda-provisioned-concurrency-simple-lambda",
+  functionName: "lambda-provisioned-concurrency-simple",
   handler: "lambda.handler",
-  code: lambda.Code.fromAsset(`${__dirname}/../`),
+  code: lambda.Code.fromAsset(`${__dirname}/../src`),
 });
 
 new LambdaWithProvisionedConcurrency(
   app,
-  "LambdaProvisionedConcurrencyLambdaWithProvisionedConcurrency",
+  "LambdaProvisionedConcurrencyLambdaWith",
   {
     env,
     role,
-    functionName: "lambda-provisioned-concurrency-with-provisioned-concurrency",
+    functionName: "lambda-provisioned-concurrency-with",
     handler: "lambda.handler",
-    code: lambda.Code.fromAsset(`${__dirname}/../`),
+    code: lambda.Code.fromAsset(`${__dirname}/../src`),
   }
 );

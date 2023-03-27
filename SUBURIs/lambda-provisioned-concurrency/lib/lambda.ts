@@ -34,7 +34,9 @@ export class Lambda extends cdk.Stack {
       }
     );
 
-    lambdaFunction.addFunctionUrl();
+    lambdaFunction.addFunctionUrl({
+      authType: lambda.FunctionUrlAuthType.NONE,
+    });
   }
 }
 
@@ -58,10 +60,11 @@ export class LambdaWithProvisionedConcurrency extends cdk.Stack {
       }
     );
 
-    lambdaFunction.addFunctionUrl();
-
     // currentVersion でエイリアスを作成
     const alias = lambdaFunction.currentVersion.addAlias("currentVersion");
+    alias.addFunctionUrl({
+      authType: lambda.FunctionUrlAuthType.NONE,
+    });
 
     // スケーラブルターゲットを作成
     const scalableAttribute = alias.addAutoScaling({
