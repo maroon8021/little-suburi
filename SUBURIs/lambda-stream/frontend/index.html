@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Lambda Stream</h1>
+  <p id="viewer"></p>
+
+  <script>
+    // https://sbfl.net/blog/2018/05/26/javascript-streams-api/
+    const viewer = document.getElementById('viewer');
+    const decoder = new TextDecoder();
+
+    fetch("https://yr2hseux6oas4ncvcymilvt3t40zzhus.lambda-url.ap-northeast-1.on.aws")
+      .then(response => response.body.getReader())
+      .then(reader => {
+        function readChunk({done, value}) {
+      if(done) {
+        // 読み込みが終わっていれば最終的なテキストを表示する。
+        console.log(veryLongText);
+        return;
+      }
+
+      viewer.innerHTML += `${decoder.decode(value)}<br />`;
+
+      // 次の値を読みにいく。
+      reader.read().then(readChunk);
+    }
+    
+    // 最初の値を読み込む。
+    reader.read().then(readChunk);
+        
+      })
+  </script>
+</body>
+</html>
