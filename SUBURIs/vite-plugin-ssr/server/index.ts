@@ -77,7 +77,7 @@ async function startServer() {
     }
   });
 
-  const port = process.env.PORT || 3000;
+  const port = process.env.PORT || 3003;
   app.listen(port);
   console.log(`Server running at http://localhost:${port}`);
 }
