@@ -11,6 +11,6 @@ services:
       - POSTGRES_INITDB_ARGS="--no-locale"
       - POSTGRES_USER=superuser
       - POSTGRES_PASSWORD=superuserpass
-      - POSTGRES_DB=dataloader
+      - POSTGRES_DB=stocka
 
     restart: always
