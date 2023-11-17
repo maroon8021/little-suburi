@@ -3,8 +3,18 @@ import "reflect-metadata";
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import { PrismaClient } from "@prisma/client";
-import { DataSource } from "typeorm";
+import { DataSource, In } from "typeorm";
 import { Post, User, Article } from "./entity";
+import DataLoader from "dataloader";
+
+const userLoader = new DataLoader(async (keys: readonly number[]) => {
+  const users = await AppDataSource.manager.find(User, {
+    where: {
+      id: In(keys),
+    },
+  });
+  return users;
+});
 
 const prisma = new PrismaClient({
   log: ["query", "info", "warn", "error"],
@@ -47,13 +57,14 @@ const typeDefs = `
     title: String!
     content: String
     published: Boolean!
-    user: [User!]
+    user: User!
   }
 
   type Article {
     id: Int!
     content: String!
-    user: [User!]
+    user: User!
+    user2: User!
   }
 
   
@@ -90,6 +101,7 @@ const resolvers = {
       return articles;
     },
   },
+  // ↓ こうではない
   // User: async (parent: any): Promise<User> => {
   //   console.log(parent);
   //   const user = await prisma.user.findUnique({
@@ -104,30 +116,21 @@ const resolvers = {
       const user = await prisma.user.findUnique({
         where: { id: parent.userId },
       });
-      console.log("user", user);
       return user ?? ({} as UserType);
     },
   },
   Article: {
     user: async (parent: any) => {
-      console.log(parent);
       console.log("in Article/user");
       const user = await AppDataSource.manager.findOneOrFail(User, {
         where: { id: parent.userId },
       });
-      console.log("user", user);
-      // return user ?? ({} as UserType);
-
-      // return [
-      //   {
-      //     id: 1,
-      //     name: "test",
-      //   },
-      // ];
-
-      return AppDataSource.manager.findOneOrFail(User, {
-        where: { id: parent.userId },
-      });
+      return user ?? ({} as UserType);
+    },
+    user2: async (parent: any) => {
+      console.log("in Post/user2");
+      const user = await userLoader.load(parent.userId);
+      return user ?? ({} as UserType);
     },
   },
 };
