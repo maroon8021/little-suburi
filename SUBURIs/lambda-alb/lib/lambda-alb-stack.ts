@@ -10,7 +10,7 @@ export class LambdaAlbStack extends cdk.Stack {
     super(scope, id, props);
 
     // Create a new VPC
-    const vpc = new ec2.Vpc(this, "MyVpc", {
+    const vpc = new ec2.Vpc(this, "LambdaAlbVPC", {
       maxAzs: 2,
       natGateways: 0,
       subnetConfiguration: [
@@ -23,30 +23,34 @@ export class LambdaAlbStack extends cdk.Stack {
     });
 
     // Create a new Lambda function with inline code
-    const myLambda = new lambda.Function(this, "MyLambda", {
+    const myLambda = new lambda.Function(this, "LambdaAlbLambda", {
       runtime: lambda.Runtime.NODEJS_20_X,
+      functionName: "LambdaAlb",
       handler: "index.handler",
       code: lambda.Code.fromInline(`
         exports.handler = async function(event, context) {
           console.log("EVENT: \\n" + JSON.stringify(event, null, 2));
-          return context.logStreamName;
+          return {
+            'statusCode': 200,
+            'body': JSON.stringify(context.logStreamName)
+          }
         };
       `),
     });
 
     // Create a new Application Load Balancer
-    const lb = new elbv2.ApplicationLoadBalancer(this, "MyALB", {
+    const lb = new elbv2.ApplicationLoadBalancer(this, "LambdaAlbAlb", {
       vpc,
       internetFacing: true,
     });
 
     // Add a listener to the Load Balancer
-    const listener = lb.addListener("MyListener", {
+    const listener = lb.addListener("LambdaAlbListener", {
       port: 80,
     });
 
     // Add a rule to the listener to route traffic to the Lambda function
-    listener.addTargets("MyTargets", {
+    listener.addTargets("LambdaAlbTarget", {
       targets: [new elbv2_targets.LambdaTarget(myLambda)],
     });
   }
