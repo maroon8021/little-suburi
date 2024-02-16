@@ -12,7 +12,7 @@ const app = new cdk.App();
 
 const { bucket } = new S3(app, "ViteReactStaticS3", {
   env,
-  bucketName: "stocka-next-bucket",
+  bucketName: "vite-react-static-bucket",
 });
 
 new CloudFront(app, "ViteReactStaticCloudfront", {

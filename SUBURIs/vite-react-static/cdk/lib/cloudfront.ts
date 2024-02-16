@@ -29,6 +29,7 @@ export class CloudFront extends Stack {
             cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
           cachePolicy: cloudfront.CachePolicy.CACHING_OPTIMIZED,
         },
+        defaultRootObject: "index.html",
       }
     );
   }
