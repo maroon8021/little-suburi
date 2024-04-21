@@ -40,3 +40,5 @@ https://zenn.dev/braveryk7/articles/source-fixall-eslint-value
 ### unused-imports
 
 https://zenn.dev/rena_h/scraps/fd330154d02f76
+
+https://stackoverflow.com/questions/71913692/module-not-found-error-cant-resolve-react-dom-client
