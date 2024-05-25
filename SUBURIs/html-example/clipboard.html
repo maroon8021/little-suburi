@@ -18,7 +18,8 @@
 
     <div>
       <button id="paste">paste</button>
-      <p id="paste-view"></p>
+      <p id="paste-text-view"></p>
+      <img id="paste-image-view">
     </div>
 
   </div>
@@ -40,11 +41,36 @@
   // }, 2000);
 
   const paste = document.getElementById('paste');
-  const pasteView = document.getElementById('paste-view');
+  const pasteTextView = document.getElementById('paste-text-view');
+  const pasteImageView = document.getElementById('paste-image-view');
 
-  paste.addEventListener('click', async () => {
+  paste.addEventListener('click', async (event) => {
+    console.log('click event fired');
+    console.log(event);
     const text = await navigator.clipboard.read();
-    pasteView.textContent = JSON.stringify(text);
+    pasteTextView.textContent = JSON.stringify(text);
   });
+
+  document.addEventListener('paste', async (event) => {
+    console.log('paste event fired');
+    console.log(event);
+    console.log(event.clipboardData);
+    const items = event.clipboardData.items;
+    
+    for (const item of items) {
+        if (item.type.startsWith('image/')) {
+          const blob = item.getAsFile();
+          pasteImageView.src = URL.createObjectURL(blob);
+          const data = event.clipboardData.getData(item.type);
+          console.log("data",data);
+        } else if (item.type === 'text/plain') {
+          console.log(item);
+          const data = event.clipboardData.getData("text");
+          console.log("data",data);
+          pasteTextView.textContent = data;
+
+        }
+    }
+});
 </script>
 </html>
