@@ -13,7 +13,14 @@
     <div>
       <button id="button">copy</button>
     </div>
-    
+  
+    <hr>
+
+    <div>
+      <button id="paste">paste</button>
+      <p id="paste-view"></p>
+    </div>
+
   </div>
 </body>
 
@@ -26,10 +33,18 @@
   });
 
 
-  setTimeout(() => {
-    console.log('copying...');
-    navigator.clipboard.writeText('Hello, world!');
-    console.log('copied!');
-  }, 2000);
+  // setTimeout(() => {
+  //   console.log('copying...');
+  //   navigator.clipboard.writeText('Hello, world!');
+  //   console.log('copied!');
+  // }, 2000);
+
+  const paste = document.getElementById('paste');
+  const pasteView = document.getElementById('paste-view');
+
+  paste.addEventListener('click', async () => {
+    const text = await navigator.clipboard.read();
+    pasteView.textContent = JSON.stringify(text);
+  });
 </script>
 </html>
