@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>ellipsis</h1>
+    <div class="container">
+      <div class="left">
+        <p class="ellipsis">
+          LongLongLongLongLongLongLongLongLongLongLong text
+        </p>
+      </div>
+      <div class="right">
+        <p>right</p>
+      </div>
+    </div>
+
+    <style>
+      div {
+        border: 1px solid black;
+      }
+      .container {
+        display: flex;
+        resize: horizontal;
+        border: 1px thick double black;
+      }
+
+      .left {
+        width: 60%;
+      }
+
+      .ellipsis {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+
+      .right {
+        width: 40%;
+      }
+    </style>
+  </body>
+</html>
