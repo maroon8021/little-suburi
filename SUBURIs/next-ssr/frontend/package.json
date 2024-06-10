@@ -14,6 +14,7 @@
     "to-lambda-js": "tsc src/lambda.ts --outDir ./.next/standalone/"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.50.1",
     "@types/node": "18.11.11",
     "@types/react": "18.0.26",
     "@types/react-dom": "18.0.9",

@@ -1,0 +1,27 @@
+version: "3.7"
+services:
+  mysql:
+    platform: linux/x86_64
+    image: mysql:5.7
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+    ports:
+      - "51000:3306"
+    volumes:
+      - ./mysql:/var/lib/mysql
+  # go-lang-migrate
+  golang-migrate:
+    platform: linux/x86_64
+    image: golang:1.22
+    container_name: migrate
+    restart: always
+    depends_on:
+      - mysql
+    volumes:
+      - ./migrations:/migrations
+    command: go install -tags 'mysql' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
