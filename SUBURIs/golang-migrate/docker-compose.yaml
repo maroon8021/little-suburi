@@ -19,9 +19,9 @@ services:
     platform: linux/x86_64
     image: golang:1.22
     container_name: migrate
-    restart: always
     depends_on:
       - mysql
     volumes:
       - ./migrations:/migrations
-    command: go install -tags 'mysql' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
+    tty: true
+    # command: go install -tags 'mysql' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
