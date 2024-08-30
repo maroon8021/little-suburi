@@ -11,9 +11,10 @@ jobs:
       - name: Send custom JSON data to Slack workflow
         uses: slackapi/slack-github-action@v1.26.0
         with:
+          channel-id: C07K2JNJV3J
           payload: |
             {
-              "text": "Message from GitHub Actions by slack app on Workflow Dispatch",
+              "text": "Message from GitHub Actions by slack app on Workflow Dispatch"
             }
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
