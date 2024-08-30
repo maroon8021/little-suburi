@@ -11,20 +11,21 @@
     "seed": "ts-node seed.ts",
     "clean": "ts-node clean.ts",
     "data": "ts-node data.ts",
+    "update-data": "ts-node update.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^20.14.11",
+    "@types/node": "^20.14.15",
     "node-dev": "^8.0.0",
-    "prisma": "^5.17.0",
+    "prisma": "^5.18.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4"
   },
   "dependencies": {
-    "@prisma/client": "^5.17.0",
+    "@prisma/client": "^5.18.0",
     "fastify": "^4.28.1"
   }
 }
