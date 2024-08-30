@@ -1,0 +1,19 @@
+# https://github.com/slackapi/slack-github-action?tab=readme-ov-file#technique-2-slack-app
+name: Slack Notification by slack app on Workflow Dispatch
+
+on:
+  workflow_dispatch:
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send custom JSON data to Slack workflow
+        uses: slackapi/slack-github-action@v1.26.0
+        with:
+          payload: |
+            {
+              "text": "Message from GitHub Actions by slack app on Workflow Dispatch",
+            }
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
