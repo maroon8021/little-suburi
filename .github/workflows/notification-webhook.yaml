@@ -12,7 +12,16 @@ jobs:
         with:
           payload: |
             {
-              "text": "Message from GitHub Actions by webhook on Workflow Dispatch",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ":white_check_mark: :white_check_mark: :white_check_mark:  The E2E test has passed successfully.  :white_check_mark: :white_check_mark: :white_check_mark: \n hoge"
+                  }
+                }
+              ]
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
