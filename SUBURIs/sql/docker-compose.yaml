@@ -1,6 +1,6 @@
 version: "3.7"
 services:
-  database:
+  postgres:
     image: postgres:12-alpine
     ports:
       - "59002:5432"
@@ -13,4 +13,17 @@ services:
       - POSTGRES_PASSWORD=superuserpass
       - POSTGRES_DB=sql
 
+    restart: always
+  mysql:
+    image: mysql:8.4
+    ports:
+      - "59003:3306"
+    volumes:
+      - .:/app:cached
+    working_dir: /app
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpass
+      - MYSQL_DATABASE=sql
+      - MYSQL_USER=superuser
+      - MYSQL_PASSWORD=superuserpass
     restart: always

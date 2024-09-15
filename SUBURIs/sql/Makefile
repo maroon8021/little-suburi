@@ -1,14 +1,23 @@
-.PHONY: up
-up:
-	docker-compose up -d
+.PHONY: up-p
+up-p:
+	docker-compose up postgres -d
 
-.PHONY: down
-down:
-	docker-compose down
+.PHONY: down-p
+down-p:
+	docker-compose down postgres
 
-.PHONY: exec
-exec:
-	docker-compose exec database bash
+.PHONY: exec-p
+exec-p:
+	docker-compose exec postgres bash
 
+.PHONY: up-m
+up-m:
+	docker-compose up -d mysql
 
-# psql -U superuser -d sql
+.PHONY: down-m
+down-m:
+	docker-compose down mysql
+
+.PHONY: exec-m
+exec-m:
+	docker-compose exec mysql bash
