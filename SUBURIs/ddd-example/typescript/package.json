@@ -1,16 +1,17 @@
 {
   "name": "typescript",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "tsx watch src/index.ts"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "dependencies": {
+    "@hono/node-server": "^1.12.2",
+    "hono": "^4.5.9"
+  },
   "devDependencies": {
-    "node-dev": "^8.0.0",
-    "typescript": "^5.1.6"
+    "@types/node": "^20.11.17",
+    "prisma": "^5.19.0",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.7.1",
+    "typescript": "^5.5.4"
   }
 }
