@@ -1,0 +1,30 @@
+{
+  "name": "distributed-transaction",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "pmd1": "prisma migrate dev --schema prisma/schema1.prisma",
+    "pmd2": "prisma migrate dev --schema prisma/schema2.prisma",
+    "pg1": "prisma generate --schema prisma/schema1.prisma",
+    "pg2": "prisma generate --schema prisma/schema2.prisma",
+    "p-run": "ts-node prisma.ts",
+    "t-run": "ts-node typeorm.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.5.5",
+    "prisma": "^5.19.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.2"
+  },
+  "dependencies": {
+    "@prisma/client": "5.19.1",
+    "pg": "^8.12.0",
+    "reflect-metadata": "^0.2.2",
+    "typeorm": "^0.3.20"
+  }
+}

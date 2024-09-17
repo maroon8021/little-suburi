@@ -1,0 +1,30 @@
+version: "3.7"
+services:
+  database1:
+    image: postgres:12-alpine
+    ports:
+      - "59010:5432"
+    volumes:
+      - .:/app:cached
+    working_dir: /app
+    environment:
+      - POSTGRES_INITDB_ARGS="--no-locale"
+      - POSTGRES_USER=u
+      - POSTGRES_PASSWORD=p
+      - POSTGRES_DB=db1
+
+    restart: always
+  database2:
+    image: postgres:12-alpine
+    ports:
+      - "59011:5432"
+    volumes:
+      - .:/app:cached
+    working_dir: /app
+    environment:
+      - POSTGRES_INITDB_ARGS="--no-locale"
+      - POSTGRES_USER=u
+      - POSTGRES_PASSWORD=p
+      - POSTGRES_DB=db2
+
+    restart: always
