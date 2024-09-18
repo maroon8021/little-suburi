@@ -6,6 +6,8 @@
   "scripts": {
     "pmd1": "prisma migrate dev --schema prisma/schema1.prisma",
     "pmd2": "prisma migrate dev --schema prisma/schema2.prisma",
+    "pmd3": "prisma migrate dev --schema prisma/db3/schema.prisma",
+    "pmd4": "prisma migrate dev --schema prisma/db4/schema.prisma",
     "pg1": "prisma generate --schema prisma/schema1.prisma",
     "pg2": "prisma generate --schema prisma/schema2.prisma",
     "p-run": "ts-node prisma.ts",
