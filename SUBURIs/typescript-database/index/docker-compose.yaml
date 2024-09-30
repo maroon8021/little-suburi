@@ -6,6 +6,7 @@ services:
       - "59001:5432"
     volumes:
       - .:/app:cached
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     working_dir: /app
     environment:
       - POSTGRES_INITDB_ARGS="--no-locale"
